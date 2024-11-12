@@ -3,3 +3,9 @@ body {
 	color: rgb(247, 56, 151);
 	font-size: 135%;
 }
+
+section {
+	border: 1px solid hotpink;
+	margin: 0.2em;
+	padding: 0 0.7em;
+}
