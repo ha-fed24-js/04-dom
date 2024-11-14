@@ -73,3 +73,77 @@ holes.forEach((hole, index) => {
 // 	// ...
 // 	index++
 // }
+
+
+const outer = document.querySelector('#outer')
+const inner = document.querySelector('#inner')
+const innerButton = document.querySelector('#inner button')
+
+outer.addEventListener('click', () => {
+	console.log('Klickade "outer".')
+})
+
+inner.addEventListener('click', event => {
+	console.log('Klickade "inner".')
+	event.stopPropagation()
+})
+
+innerButton.addEventListener('click', () => {
+	console.log('Klickade "innerButton".')
+})
+
+
+// sventon-input
+const sventonInput = document.querySelector('#sventon-input')
+sventonInput.addEventListener('keydown', event => {
+	console.log('Du tryckte på: ', event.key)
+	// console.log('Status för Ctrl: ', event.ctrlKey)
+	let key = event.key
+	if( key.toLowerCase() === 's' ) {
+		console.log('S är förbjudet!')
+		event.target.value += 't'
+		event.preventDefault()
+	}
+})
+sventonInput.addEventListener('change', event => {
+	// Inträffar när jag lämnar input-fältet
+	sventonTouched = true
+	console.log('Textfältet innehåller: ', event.target.value)
+	if( event.target.value.length > 0 ) {
+		// textfältet är inte tomt
+		sventonValid = true
+	} else {
+		sventonValid = false
+	}
+})
+// Enklare syntax:
+sventonInput.addEventListener('blur', displayValidationErrors)
+// Vanligare syntax:
+// sventonInput.addEventListener('blur', () => {
+// 	displayValidationErrors()
+// })
+
+let sventonTouched = false
+let sventonValid = false
+displayValidationErrors()
+
+function displayValidationErrors() {
+	const errorPara = document.querySelector('p.error')
+	// Ej touched: visa inget
+	// Touched men fel: error
+	// Touched men okej: valid
+	sventonInput.classList.remove('error')
+	sventonInput.classList.remove('valid')
+
+	if( !sventonTouched ) {
+		console.log('displayValidationErrors: not touched')
+	}
+	else if( !sventonValid ) {
+		sventonInput.classList.add('error')
+		errorPara.classList.remove('hidden')
+	}
+	else {
+		sventonInput.classList.add('valid')
+		errorPara.classList.add('hidden')
+	}
+}
