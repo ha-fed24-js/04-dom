@@ -9,3 +9,26 @@ section {
 	margin: 0.2em;
 	padding: 0 0.7em;
 }
+
+/* Whack-a-mole */
+.hole-container {
+	display: flex;
+	gap: 2em;
+	margin-bottom: 1em;
+}
+.hole {
+	border: 1px solid rgb(78, 21, 30);
+	width: 3em;
+	height: 3em;
+	border-radius: 100%;
+	box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5);
+	transition: box-shadow 0.3s;
+}
+.hole:hover {
+	cursor: pointer;
+	box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.75);
+}
+.hole.mole {
+	background-color: rgb(130, 55, 55);
+	/* TODO: lägg till en animation! */
+}

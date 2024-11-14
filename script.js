@@ -37,3 +37,39 @@ cvButton.addEventListener('click', () => {
 	// console.log('Li: ', li)
 	list.append(li)
 })
+
+
+// Whack-a-mole
+// plocka ut elementen
+// variabel som kommer ihåg vilket hål som är aktivt
+// event listener som lyssnar när musen går in över ett element (inte klick)
+// slumpa ett nytt hål
+
+const holes = Array.from( document.querySelectorAll('.hole') )
+let moleIndex = 0  // här finns mullvaden just nu - börjar på index 0
+
+holes.forEach((hole, index) => {
+	hole.addEventListener('mouseenter', () => {
+		if( moleIndex === index ) {
+			// slumpa ny position
+			// ta bort klassen .mole från aktuella hålet
+			// lägg till .mole i annat hål
+			hole.classList.remove('mole')
+
+			let newPosition
+			do {
+				// Slumpa en position, tills det inte är samma
+				newPosition = Math.floor(Math.random() * holes.length)
+			} while( newPosition === moleIndex );
+			moleIndex = newPosition
+
+			holes[moleIndex].classList.add('mole')
+		}
+	})
+})
+
+// for( let index=0; index < holes.length; index++ ) {
+// 	let hole = holes[index]
+// 	// ...
+// 	index++
+// }
